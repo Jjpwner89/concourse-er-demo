@@ -1,26 +1,169 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Concourse design tokens — matched to the Concourse platform screenshots:
+   near-black sidebar, warm off-white canvas, slate data colors, coral for selection/alerts. */
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif-doc), ui-serif, Georgia, serif;
+
+  --color-canvas: #f2f2ed;
+  --color-surface: #ffffff;
+  --color-sunken: #f7f7f3;
+  --color-line: #e2e2da;
+  --color-line-strong: #cfcfc6;
+
+  --color-ink: #15191c;
+  --color-ink-2: #3c4448;
+  --color-muted: #6a7276;
+  --color-faint: #9aa1a4;
+
+  --color-night: #121619;
+  --color-night-2: #1d2327;
+  --color-night-3: #2a3135;
+  --color-night-ink: #e9ece9;
+  --color-night-muted: #9aa3a6;
+
+  --color-slate: #3e4a4f;
+  --color-slate-2: #7d8a8e;
+  --color-slate-3: #c3cbcd;
+  --color-slate-4: #e4e9ea;
+
+  --color-coral: #d9653f;
+  --color-coral-soft: #fbece5;
+
+  --color-ok: #2f6b43;
+  --color-ok-soft: #e4efe6;
+  --color-warn: #9a6512;
+  --color-warn-soft: #f8eed9;
+  --color-danger: #b03d27;
+  --color-danger-soft: #f7e3dd;
+
+  --color-ai: #4a55a2;
+  --color-ai-soft: #eceefa;
+  --color-ai-line: #c9cdee;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+}
+
+.eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 10px;
+}
+
+.tbl {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13.5px;
+}
+.tbl th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-sunken);
+  white-space: nowrap;
+}
+.tbl td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--color-line);
+  vertical-align: top;
+}
+.tbl tr:last-child td {
+  border-bottom: 0;
+}
+.tbl tbody tr:hover td {
+  background: #fafaf7;
+}
+
+.doc {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.65;
+  color: #1d2224;
+}
+
+.prose-ai p {
+  margin: 0 0 0.6em;
+}
+.prose-ai ul,
+.prose-ai ol {
+  margin: 0 0 0.6em 1.1em;
+}
+.prose-ai ul {
+  list-style: disc;
+}
+.prose-ai ol {
+  list-style: decimal;
+}
+.prose-ai li {
+  margin: 0.15em 0;
+}
+.prose-ai strong {
+  font-weight: 600;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 2px;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+}
+.field {
+  width: 100%;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface);
+  border-radius: 8px;
+  padding: 8px 11px;
+  font-size: 14px;
+  color: var(--color-ink);
+}
+.field:focus {
+  outline: 2px solid var(--color-slate-3);
+  border-color: var(--color-slate-2);
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.thinking span {
+  animation: pulse-dot 1.2s infinite;
+}
+.thinking span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.thinking span:nth-child(3) {
+  animation-delay: 0.4s;
 }
